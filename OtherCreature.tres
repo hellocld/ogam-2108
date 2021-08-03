@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Creature.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+Name = "OtherCreature"
+Dexterity = 0
+Attack_Power = 2
+HP = 100
+CP = 13
+Defense = 12
+Critical = 20
+Speed = 2

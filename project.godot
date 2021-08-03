@@ -8,3 +8,12 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Resource",
+"class": "Creature",
+"language": "GDScript",
+"path": "res://Creature.gd"
+} ]
+_global_script_class_icons={
+"Creature": ""
+}
