@@ -9,11 +9,45 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Resource",
-"class": "Creature",
+"base": "Reference",
+"class": "BattleEvent",
 "language": "GDScript",
-"path": "res://Creature.gd"
+"path": "res://BattleEvent.gd"
+}, {
+"base": "Node",
+"class": "BattleParty",
+"language": "GDScript",
+"path": "res://BattleParty.gd"
+}, {
+"base": "Node",
+"class": "BattlePartyAI",
+"language": "GDScript",
+"path": "res://BattlePartyAI.gd"
+}, {
+"base": "Resource",
+"class": "CreatureAction",
+"language": "GDScript",
+"path": "res://CreatureAction.gd"
+}, {
+"base": "Spatial",
+"class": "CreatureNode",
+"language": "GDScript",
+"path": "res://CreatureNode.gd"
+}, {
+"base": "Resource",
+"class": "CreatureStats",
+"language": "GDScript",
+"path": "res://CreatureStats.gd"
 } ]
 _global_script_class_icons={
-"Creature": ""
+"BattleEvent": "",
+"BattleParty": "",
+"BattlePartyAI": "",
+"CreatureAction": "",
+"CreatureNode": "",
+"CreatureStats": ""
 }
+
+[autoload]
+
+BattleManager="*res://BattleManager.gd"

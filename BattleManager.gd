@@ -1,56 +1,53 @@
 extends Node
 
+signal BattleEventDone
+
 export(Resource) var CreatureA 
 export(Resource) var CreatureB
 
-var creature_a : Creature
-var creature_b : Creature
+
+var event_queue = []
+var battle_parties = []
+
+var creature_a : CreatureNode
+var creature_b : CreatureNode
 var rng
 
 
 func _ready():
 	randomize()
 	rng = RandomNumberGenerator.new()
-	# Instance a timer per Creature
-	var timer_a = Timer.new()
-	var timer_b = Timer.new()
-	timer_a.one_shot = true
-	timer_b.one_shot = true
-	timer_a.connect("timeout", self, "roll_for_attack", [CreatureA, CreatureB, timer_a])
-	timer_b.connect("timeout", self, "roll_for_attack", [CreatureB, CreatureA, timer_b])
-	add_child(timer_a)
-	add_child(timer_b)
-	timer_a.start(3)
-	timer_b.start(2)
 	
 
-func roll_for_attack(attacker, target, timer):
-	if attacker.HP <= 0:
-		return # Can't attack if you're dead
-	print("-- %s attacking %s --" % [attacker.Name, target.Name])
-	var roll = randi() % 20
-	print("Roll: %d" % roll)
-	if roll == 1:
-		print("%s: Critical miss!" % attacker.Name)
-	elif roll == 20:
-		print("%s: Critical hit!" % attacker.Name)
-		apply_damage(attacker, target, true)
-	elif roll + attacker.Dexterity < target.Defense:
-		print("%s: Miss!" % attacker.Name)
+func register_party(party:BattleParty):
+	if !battle_parties.has(party):
+		battle_parties.append(party)
 	else:
-		print("%s: Hit!" % attacker.Name)
-		apply_damage(attacker, target)
-	print("-- Attack done --\n\n")
-	timer.start(3)
+		print("Warning: BattleManager alread has reference to party %s" % party)
+
+func get_opposing_parties(party:BattleParty) -> Array:
+	var op = battle_parties.duplicate()
+	op.erase(party)
+	return op
 
 
-func apply_damage(attacker, target, crit=false):
-	var damage = attacker.Attack_Power
-	if crit:
-		damage *= 2
-	print("%s takes %d damage from %s" % [target.Name, damage, attacker.Name])
-	target.HP -= damage
-	# Handle death?
-	if target.HP <= 0:
-		print("%s is dead." % target.Name)
+func queue_event(instigator:Node, event_signal:String):
+	print("Queueing event %s for creature %s" % [event_signal, instigator])
+	var e = BattleEvent.new()
+	e.instigator = instigator
+	e.event_signal = event_signal
+	event_queue.append(e)
+	if event_queue.size() == 1:
+		pop_next_event()
+
+
+func pop_next_event():
+	print("Attemping to pop event...")
+	if event_queue.size() <= 0:
+		print("Queue empty.")
+		return
+	var e = event_queue.pop_front() as BattleEvent
+	print("Executing event %s on %s" % [e.event_signal, e.instigator])
+	e.instigator.emit_signal(e.event_signal)
+
 

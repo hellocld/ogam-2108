@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource( 1 )
-Name = "OtherCreature"
-Dexterity = 0
-Attack_Power = 2
-HP = 100
-CP = 13
-Defense = 12
+Name = "Cube"
+Dexterity = 5
+Attack_Power = 10
+HP = 120
+CP = 0
+Defense = 8
 Critical = 20
-Speed = 2
+Speed = 1
