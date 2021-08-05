@@ -11,4 +11,4 @@ HP = 120
 CP = 0
 Defense = 8
 Critical = 20
-Speed = 1
+Initiative = 0.0

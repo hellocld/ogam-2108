@@ -36,6 +36,8 @@ func _ready():
 
 
 func start_initiative_timer(init:float = 0):
+	if HP <= 0:
+		return
 	_timer.start(1.0 - init) 
 
 """
@@ -58,24 +60,28 @@ class CreatureInfo:
 Base attack for all creatures
 """
 func _attack(target:CreatureNode):
-	print("%s attacks." % [self])
+	print("%s attempts to attack %s." % [self.name, target.name])
 	# Play attack animation
 	_anim_state.travel("Attack")
 	# Roll a d20
 	var roll = randi() % 20
-	print("%s rolled a %d" % [self, roll])
+	print("%s rolled a %d" % [self.name, roll])
 	var conn_error
 	if roll == 1:
 		# Critical miss
+		print("%s critically misses %s" % [self.name, target.name])
 		conn_error = connect("DoAction", self, "_critical_miss_target", [target], CONNECT_ONESHOT)
 	elif roll == 20:
 		# Critical hit
+		print("%s critically hits %s" % [self.name, target.name])
 		conn_error = connect("DoAction", self, "_critical_hit_target", [target], CONNECT_ONESHOT)
 	elif roll + Stats.Dexterity < target.Stats.Defense:
 		# Miss
+		print("%s misses %s" % [self.name, target.name])
 		conn_error = connect("DoAction", self, "_miss_target", [target], CONNECT_ONESHOT)
 	else:
 		# Hit
+		print("%s hits %s" % [self.name, target.name])
 		conn_error = connect("DoAction", self, "_hit_target", [target], CONNECT_ONESHOT)
 
 	# Rudimentary error handling
@@ -85,6 +91,7 @@ func _attack(target:CreatureNode):
 
 func _die():
 	# Remove all queued events from the BattleManager queue
+	BattleManager.remove_events_for_instigator(self)
 	# Play some die animation
 	_anim_state.travel("Die")
 	emit_signal("DoDie", self)
@@ -107,7 +114,7 @@ triggers whatever signal should occur following the attack.
 """
 func do_action():
 	emit_signal("DoAction")
-
+	start_initiative_timer()
 
 func ready_for_action():
 	emit_signal("ReadyForAction")
@@ -123,7 +130,9 @@ func _miss_target(target:CreatureNode):
 
 func _critical_hit_target(target:CreatureNode):
 	emit_signal("DoCriticalDamageToTarget", target, Stats.Attack_Power * 2)
+	target._take_damage(Stats.Attack_Power * 2)
 
 
 func _hit_target(target:CreatureNode):
+	target._take_damage(Stats.Attack_Power)
 	emit_signal("DoDamageToTarget", target, Stats.Attack_Power)

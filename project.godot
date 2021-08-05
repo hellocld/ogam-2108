@@ -48,6 +48,11 @@ _global_script_class_icons={
 "CreatureStats": ""
 }
 
+[application]
+
+config/name="OGAM-2108"
+config/description="Building a RPG battle system for One Game A Month"
+
 [autoload]
 
 BattleManager="*res://BattleManager.gd"

@@ -20,7 +20,19 @@ func _make_decision(creature:CreatureNode):
 	var enemy_party_info = selected_party.get_party_info()
 	# choose action based on provided info
 	var target_keys = enemy_party_info.keys()
-	var target_enemy = target_keys[0] as CreatureNode
+	var possible_targets = _get_living_targets(enemy_party_info) as Array
+	if possible_targets.size() == 0:
+		print("No targets available for %s" % creature.name)
+		return
+	possible_targets.shuffle()
+	var target_enemy =  possible_targets[0] as CreatureNode
 	creature.connect("DoBattleEvent", creature, "_attack", [target_enemy], CONNECT_ONESHOT)
 	# queue action in BattleManager
 	BattleManager.queue_event(creature, "DoBattleEvent")
+
+func _get_living_targets(party:Dictionary) -> Array:
+	var targets = []
+	for target in party.keys():
+		if party[target].is_alive:
+			targets.append(target)
+	return targets
