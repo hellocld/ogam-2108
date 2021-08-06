@@ -115,7 +115,7 @@ Animation_Tree = NodePath("AnimationTree")
 [node name="Model_Cube" type="Spatial" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="Model_Cube"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.076031, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0970463, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
