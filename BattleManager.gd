@@ -24,7 +24,7 @@ func register_party(party:BattleParty):
 	if !battle_parties.has(party):
 		battle_parties.append(party)
 	else:
-		print("Warning: BattleManager alread has reference to party %s" % party)
+		Logger.log_warning(self, "Warning: BattleManager alread has reference to party %s" % party)
 
 
 func get_opposing_parties(party:BattleParty) -> Array:
@@ -34,7 +34,7 @@ func get_opposing_parties(party:BattleParty) -> Array:
 
 
 func queue_event(instigator:Node, event_signal:String):
-	print("Queueing event %s for creature %s" % [event_signal, instigator])
+	Logger.log_info(self, "Queueing event %s for creature %s" % [event_signal, instigator.name])
 	var e = BattleEvent.new()
 	e.instigator = instigator
 	e.event_signal = event_signal
@@ -44,12 +44,12 @@ func queue_event(instigator:Node, event_signal:String):
 
 
 func execute_next_event():
-	print("Attemping to pop event...")
+	Logger.log_info(self, "Attemping to pop event...")
 	if event_queue.size() <= 0:
-		print("Queue empty.")
+		Logger.log_info(self, "Queue empty.")
 		return
 	var e = event_queue.front() as BattleEvent
-	print("Executing event %s on %s" % [e.event_signal, e.instigator])
+	Logger.log_info(self, "Executing event %s on %s" % [e.event_signal, e.instigator.name])
 	e.instigator.emit_signal(e.event_signal)
 
 

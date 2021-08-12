@@ -56,3 +56,4 @@ config/description="Building a RPG battle system for One Game A Month"
 [autoload]
 
 BattleManager="*res://BattleManager.gd"
+Logger="*res://Logger.gd"

@@ -13,7 +13,7 @@ func _ready():
 
 
 func _make_decision(creature:CreatureNode):
-	print("Making decision for %s" % creature)
+	Logger.log_info(self, "Making decision for %s" % creature.name)
 	# get battle info from BattleManager
 	var enemy_parties = BattleManager.get_opposing_parties(_party)
 	var selected_party = enemy_parties[0] as BattleParty
@@ -22,12 +22,13 @@ func _make_decision(creature:CreatureNode):
 	var target_keys = enemy_party_info.keys()
 	var possible_targets = _get_living_targets(enemy_party_info) as Array
 	if possible_targets.size() == 0:
-		print("No targets available for %s" % creature.name)
+		Logger.log_info(self, "No targets available for %s" % creature.name)
 		return
 	possible_targets.shuffle()
 	var target_enemy =  possible_targets[0] as CreatureNode
 	creature.connect("DoBattleEvent", creature, "_attack", [target_enemy], CONNECT_ONESHOT)
 	# queue action in BattleManager
+	Logger.log_info(self, "Queueing event")
 	BattleManager.queue_event(creature, "DoBattleEvent")
 
 func _get_living_targets(party:Dictionary) -> Array:

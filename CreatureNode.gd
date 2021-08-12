@@ -60,36 +60,37 @@ class CreatureInfo:
 Base attack for all creatures
 """
 func _attack(target:CreatureNode):
-	print("%s attempts to attack %s." % [self.name, target.name])
+	Logger.log_info(self, "%s attempts to attack %s." % [self.name, target.name])
 	# Play attack animation
 	_anim_state.travel("Attack")
 	# Roll a d20
 	var roll = randi() % 20
-	print("%s rolled a %d" % [self.name, roll])
+	Logger.log_info(self, "%s rolled a %d" % [self.name, roll])
 	var conn_error
 	if roll == 1:
 		# Critical miss
-		print("%s critically misses %s" % [self.name, target.name])
+		Logger.log_info(self, "%s critically misses %s" % [self.name, target.name])
 		conn_error = connect("DoAction", self, "_critical_miss_target", [target], CONNECT_ONESHOT)
 	elif roll == 20:
 		# Critical hit
-		print("%s critically hits %s" % [self.name, target.name])
+		Logger.log_info(self, "%s critically hits %s" % [self.name, target.name])
 		conn_error = connect("DoAction", self, "_critical_hit_target", [target], CONNECT_ONESHOT)
 	elif roll + Stats.Dexterity < target.Stats.Defense:
 		# Miss
-		print("%s misses %s" % [self.name, target.name])
+		Logger.log_info(self, "%s misses %s" % [self.name, target.name])
 		conn_error = connect("DoAction", self, "_miss_target", [target], CONNECT_ONESHOT)
 	else:
 		# Hit
-		print("%s hits %s" % [self.name, target.name])
+		Logger.log_info(self, "%s hits %s" % [self.name, target.name])
 		conn_error = connect("DoAction", self, "_hit_target", [target], CONNECT_ONESHOT)
 
 	# Rudimentary error handling
 	if conn_error != OK:
-		print("Error while connecting DoAction signal: %d" % conn_error)
+		Logger.log_error(self, "Error while connecting DoAction signal: %d" % conn_error)
 
 
 func _die():
+	Logger.log_info(self, "%s has died." % self.name)
 	# Remove all queued events from the BattleManager queue
 	BattleManager.remove_events_for_instigator(self)
 	# Play some die animation
@@ -98,7 +99,7 @@ func _die():
 
 
 func _take_damage(damage:int):
-	print("%s taking %d damage" % [self, damage])
+	Logger.log_info(self, "%s taking %d damage" % [self.name, damage])
 	if HP - damage <= 0:
 		HP = 0
 		_die()
