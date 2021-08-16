@@ -1,140 +1,67 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://CreatureNode.gd" type="Script" id=1]
 [ext_resource path="res://Creatures/Cube/CreatureStats_Cube.tres" type="Resource" id=2]
+[ext_resource path="res://Models/Humanoid/Humanoid.gltf" type="PackedScene" id=3]
 
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 1, 2, 1 )
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.94902, 0.027451, 0.545098, 1 )
-
-[sub_resource type="Animation" id=3]
-length = 0.4
-tracks/0/type = "transform"
-tracks/0/path = NodePath("MeshInstance")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, 0, 0.837684, 0, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
-tracks/1/type = "method"
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "do_action"
-} ]
-}
-
-[sub_resource type="Animation" id=4]
-length = 0.4
-tracks/0/type = "transform"
-tracks/0/path = NodePath("MeshInstance")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.2, 1, -1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
-
-[sub_resource type="Animation" id=5]
-length = 0.3
-tracks/0/type = "transform"
-tracks/0/path = NodePath("MeshInstance")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, -1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.3, 1, -1, 0, 0, 0, 0, 0.707107, 0.707107, 1, 1, 1 )
-
-[sub_resource type="Animation" id=6]
-length = 0.4
-loop = true
-tracks/0/type = "transform"
-tracks/0/path = NodePath("MeshInstance")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.1, 1, 0, 0.1, 0, 0, 0, 0, 1, 1, 1, 1, 0.3, 1, 0, -0.1, 0, 0, 0, 0, 1, 1, 1, 1, 0.4, 1, 0, -0.1, 0, 0, 0, 0, 1, 1, 1, 1 )
-
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=1]
 animation = "Attack"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
-animation = "Dead"
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "Die"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "Idle"
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Idle-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
-animation = "Damaged"
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "TakeDamage"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+[sub_resource type="AnimationNodeStateMachineTransition" id=5]
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
 switch_mode = 2
 auto_advance = true
+xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
 switch_mode = 2
 auto_advance = true
+xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachine" id=16]
-states/Attack/node = SubResource( 7 )
+[sub_resource type="AnimationNodeStateMachine" id=10]
+states/Attack/node = SubResource( 1 )
 states/Attack/position = Vector2( 212, 33 )
-states/Die/node = SubResource( 8 )
+states/Die/node = SubResource( 2 )
 states/Die/position = Vector2( 69, 139 )
-states/Idle/node = SubResource( 9 )
+states/Idle/node = SubResource( 3 )
 states/Idle/position = Vector2( 212, 139 )
-states/TakeDamage/node = SubResource( 10 )
+states/TakeDamage/node = SubResource( 4 )
 states/TakeDamage/position = Vector2( 212, 244 )
-transitions = [ "Idle", "Attack", SubResource( 11 ), "Idle", "TakeDamage", SubResource( 12 ), "Idle", "Die", SubResource( 13 ), "Attack", "Idle", SubResource( 14 ), "TakeDamage", "Idle", SubResource( 15 ) ]
+transitions = [ "Idle", "Attack", SubResource( 5 ), "Idle", "TakeDamage", SubResource( 6 ), "Idle", "Die", SubResource( 7 ), "Attack", "Idle", SubResource( 8 ), "TakeDamage", "Idle", SubResource( 9 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -342, -48 )
+graph_offset = Vector2( -371, 24 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=17]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=11]
 
 [node name="Creature_Cube" type="Spatial"]
 script = ExtResource( 1 )
 Stats = ExtResource( 2 )
 Animation_Tree = NodePath("AnimationTree")
 
-[node name="Model_Cube" type="Spatial" parent="."]
-
-[node name="MeshInstance" type="MeshInstance" parent="Model_Cube"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0652449, 0 )
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="MeshInstance2" type="MeshInstance" parent="Model_Cube/MeshInstance"]
-transform = Transform( 0.533505, 0, 0, 0, 0.142065, 0, 0, 0, 1.22861, 0.443197, 0.510076, 4.76837e-07 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Model_Cube")
-anims/Attack = SubResource( 3 )
-anims/Damaged = SubResource( 4 )
-anims/Dead = SubResource( 5 )
-anims/Idle = SubResource( 6 )
+[node name="Humanoid" parent="." instance=ExtResource( 3 )]
 
 [node name="InitiativeTimer" type="Timer" parent="."]
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 16 )
-anim_player = NodePath("../AnimationPlayer")
+tree_root = SubResource( 10 )
+anim_player = NodePath("../Humanoid/AnimationPlayer")
 active = true
-parameters/playback = SubResource( 17 )
+parameters/playback = SubResource( 11 )
+
+[editable path="Humanoid"]
