@@ -1,0 +1,221 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://UI/Fonts/Parc Place Legacy.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://UI/CharacterStatus.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.227451, 0.627451, 0.847059, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 16
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="DynamicFont" id=4]
+size = 18
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.847059, 0.256495, 0.227451, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.847059, 0.823529, 0.227451, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 4
+
+[node name="CharacterStatus" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 0.128
+margin_bottom = 0.199997
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Name_Label = NodePath("Panel/Name")
+HP_Bar = NodePath("MarginContainer/StatusBars/HP/Bar")
+HP_Text = NodePath("MarginContainer/StatusBars/HP/HBoxContainer/Text")
+CP_Bar = NodePath("MarginContainer/StatusBars/CP/Bar")
+CP_Text = NodePath("MarginContainer/StatusBars/CP/HBoxContainer/Text")
+Time_Bar = NodePath("MarginContainer/StatusBars/Time/Bar")
+
+[node name="Panel" type="MarginContainer" parent="."]
+anchor_right = 0.333
+anchor_bottom = 1.0
+margin_right = 0.00799561
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="Panel"]
+margin_left = 8.0
+margin_top = 24.0
+margin_right = 333.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 1 )
+text = "Character Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.333
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.00799561
+margin_bottom = 0.00299835
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatusBars" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 667.0
+margin_bottom = 61.0
+size_flags_horizontal = 3
+custom_constants/separation = 24
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CP" type="VBoxContainer" parent="MarginContainer/StatusBars"]
+margin_right = 201.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+
+[node name="Bar" type="ProgressBar" parent="MarginContainer/StatusBars/CP"]
+margin_right = 201.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 3 )
+value = 60.0
+rounded = true
+percent_visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/StatusBars/CP"]
+margin_top = 23.0
+margin_right = 201.0
+margin_bottom = 45.0
+
+[node name="Label" type="Label" parent="MarginContainer/StatusBars/CP/HBoxContainer"]
+margin_right = 113.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 4 )
+text = "CP"
+
+[node name="Text" type="Label" parent="MarginContainer/StatusBars/CP/HBoxContainer"]
+margin_left = 117.0
+margin_right = 201.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 4 )
+text = "100/100	"
+
+[node name="HP" type="VBoxContainer" parent="MarginContainer/StatusBars"]
+margin_left = 225.0
+margin_right = 426.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+
+[node name="Bar" type="ProgressBar" parent="MarginContainer/StatusBars/HP"]
+margin_right = 201.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 3 )
+value = 60.0
+rounded = true
+percent_visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/StatusBars/HP"]
+margin_top = 23.0
+margin_right = 201.0
+margin_bottom = 45.0
+
+[node name="Label" type="Label" parent="MarginContainer/StatusBars/HP/HBoxContainer"]
+margin_right = 113.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 4 )
+text = "HP"
+
+[node name="Text" type="Label" parent="MarginContainer/StatusBars/HP/HBoxContainer"]
+margin_left = 117.0
+margin_right = 201.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 4 )
+text = "100/100	"
+
+[node name="Time" type="VBoxContainer" parent="MarginContainer/StatusBars"]
+margin_left = 450.0
+margin_right = 651.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+
+[node name="Bar" type="ProgressBar" parent="MarginContainer/StatusBars/Time"]
+margin_right = 201.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = SubResource( 3 )
+value = 60.0
+rounded = true
+percent_visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/StatusBars/Time"]
+margin_top = 23.0
+margin_right = 201.0
+margin_bottom = 45.0
+
+[node name="Label" type="Label" parent="MarginContainer/StatusBars/Time/HBoxContainer"]
+margin_right = 201.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 4 )
+text = "Time"

@@ -3,10 +3,10 @@ extends Resource
 
 
 export(String) var Name
-export(int) var Dexterity
-export(int) var Attack_Power
-export(int) var HP
-export(int) var CP
-export(int) var Defense
-export(int) var Critical
+export(int, -20, 20) var Dexterity
+export(int, -20, 20) var Attack_Power
+export(int, -20, 20) var HP
+export(int, -20, 20) var CP
+export(int, -20, 20) var Defense
+export(int, -20, 20) var Critical
 export(float) var Initiative

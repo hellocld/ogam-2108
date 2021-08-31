@@ -1,0 +1,217 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/CharacterStatus.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/Fonts/Parc Place Legacy.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="BattlePanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharactersPanel" type="Panel" parent="."]
+anchor_top = 0.673
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.199982
+margin_bottom = -6.10352e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharactersPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharacterStatus" parent="CharactersPanel/VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1024.0
+margin_bottom = 62.0
+
+[node name="Name" parent="CharactersPanel/VBoxContainer/CharacterStatus/Panel" index="0"]
+margin_top = 17.0
+margin_bottom = 45.0
+
+[node name="StatusBars" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer" index="0"]
+margin_bottom = 58.0
+
+[node name="CP" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer/StatusBars" index="0"]
+margin_bottom = 42.0
+
+[node name="Bar" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer/StatusBars/CP" index="0"]
+margin_bottom = 16.0
+
+[node name="HBoxContainer" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer/StatusBars/CP" index="1"]
+margin_top = 20.0
+margin_bottom = 42.0
+
+[node name="HP" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer/StatusBars" index="1"]
+margin_bottom = 42.0
+
+[node name="Bar" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer/StatusBars/HP" index="0"]
+margin_bottom = 16.0
+
+[node name="HBoxContainer" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer/StatusBars/HP" index="1"]
+margin_top = 20.0
+margin_bottom = 42.0
+
+[node name="Time" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer/StatusBars" index="2"]
+margin_bottom = 42.0
+
+[node name="Bar" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer/StatusBars/Time" index="0"]
+margin_bottom = 16.0
+
+[node name="HBoxContainer" parent="CharactersPanel/VBoxContainer/CharacterStatus/MarginContainer/StatusBars/Time" index="1"]
+margin_top = 20.0
+margin_bottom = 42.0
+
+[node name="CharacterStatus2" parent="CharactersPanel/VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 66.0
+margin_right = 1024.0
+margin_bottom = 128.0
+
+[node name="Name" parent="CharactersPanel/VBoxContainer/CharacterStatus2/Panel" index="0"]
+margin_top = 17.0
+margin_bottom = 45.0
+
+[node name="StatusBars" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer" index="0"]
+margin_bottom = 58.0
+
+[node name="CP" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer/StatusBars" index="0"]
+margin_bottom = 42.0
+
+[node name="Bar" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer/StatusBars/CP" index="0"]
+margin_bottom = 16.0
+
+[node name="HBoxContainer" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer/StatusBars/CP" index="1"]
+margin_top = 20.0
+margin_bottom = 42.0
+
+[node name="HP" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer/StatusBars" index="1"]
+margin_bottom = 42.0
+
+[node name="Bar" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer/StatusBars/HP" index="0"]
+margin_bottom = 16.0
+
+[node name="HBoxContainer" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer/StatusBars/HP" index="1"]
+margin_top = 20.0
+margin_bottom = 42.0
+
+[node name="Time" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer/StatusBars" index="2"]
+margin_bottom = 42.0
+
+[node name="Bar" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer/StatusBars/Time" index="0"]
+margin_bottom = 16.0
+
+[node name="HBoxContainer" parent="CharactersPanel/VBoxContainer/CharacterStatus2/MarginContainer/StatusBars/Time" index="1"]
+margin_top = 20.0
+margin_bottom = 42.0
+
+[node name="CharacterStatus3" parent="CharactersPanel/VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 132.0
+margin_right = 1024.0
+margin_bottom = 195.0
+
+[node name="Name" parent="CharactersPanel/VBoxContainer/CharacterStatus3/Panel" index="0"]
+margin_top = 17.0
+margin_bottom = 45.0
+
+[node name="StatusBars" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer" index="0"]
+margin_bottom = 58.0
+
+[node name="CP" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer/StatusBars" index="0"]
+margin_bottom = 42.0
+
+[node name="Bar" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer/StatusBars/CP" index="0"]
+margin_bottom = 16.0
+
+[node name="HBoxContainer" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer/StatusBars/CP" index="1"]
+margin_top = 20.0
+margin_bottom = 42.0
+
+[node name="HP" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer/StatusBars" index="1"]
+margin_bottom = 42.0
+
+[node name="Bar" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer/StatusBars/HP" index="0"]
+margin_bottom = 16.0
+
+[node name="HBoxContainer" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer/StatusBars/HP" index="1"]
+margin_top = 20.0
+margin_bottom = 42.0
+
+[node name="Time" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer/StatusBars" index="2"]
+margin_bottom = 42.0
+
+[node name="Bar" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer/StatusBars/Time" index="0"]
+margin_bottom = 16.0
+
+[node name="HBoxContainer" parent="CharactersPanel/VBoxContainer/CharacterStatus3/MarginContainer/StatusBars/Time" index="1"]
+margin_top = 20.0
+margin_bottom = 42.0
+
+[node name="PrimaryList" type="PanelContainer" parent="."]
+anchor_left = 0.255
+anchor_top = 0.943
+anchor_right = 0.53
+anchor_bottom = 0.943
+margin_left = -0.316376
+margin_top = -146.246
+margin_right = 0.0836182
+margin_bottom = -0.246277
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="PrimaryList"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 275.0
+margin_bottom = 139.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+items = [ "Attack", null, false, "One-Liner", null, false, "Use Item", null, false ]
+auto_height = true
+
+[node name="SecondaryList" type="PanelContainer" parent="."]
+anchor_left = 0.276
+anchor_top = 0.985
+anchor_right = 0.551
+anchor_bottom = 0.985
+margin_left = -0.401733
+margin_top = -146.248
+margin_right = -0.00170898
+margin_bottom = -0.247925
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="SecondaryList"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 275.0
+margin_bottom = 139.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+items = [ "Attack", null, false, "One-Liner", null, false, "Use Item", null, false ]
+auto_height = true
+
+[editable path="CharactersPanel/VBoxContainer/CharacterStatus"]
+[editable path="CharactersPanel/VBoxContainer/CharacterStatus2"]
+[editable path="CharactersPanel/VBoxContainer/CharacterStatus3"]

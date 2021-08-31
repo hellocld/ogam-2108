@@ -9,30 +9,45 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "ActionTimer",
+"language": "GDScript",
+"path": "res://ActionTimer.gd"
+}, {
+"base": "Node",
+"class": "Actions",
+"language": "GDScript",
+"path": "res://Statics/Actions.gd"
+}, {
+"base": "BattleQueueItem",
+"class": "BQ_Action",
+"language": "GDScript",
+"path": "res://BQ_Action.gd"
+}, {
+"base": "BattleQueueItem",
+"class": "BQ_Animation",
+"language": "GDScript",
+"path": "res://BQ_Animation.gd"
+}, {
+"base": "Resource",
+"class": "BattleQueueItem",
+"language": "GDScript",
+"path": "res://BattleQueueItem.gd"
+}, {
 "base": "Reference",
-"class": "BattleEvent",
+"class": "BattleQueueReference",
 "language": "GDScript",
-"path": "res://BattleEvent.gd"
+"path": "res://BattleQueueReference.gd"
 }, {
 "base": "Node",
-"class": "BattleParty",
+"class": "Creature",
 "language": "GDScript",
-"path": "res://BattleParty.gd"
-}, {
-"base": "Node",
-"class": "BattlePartyAI",
-"language": "GDScript",
-"path": "res://BattlePartyAI.gd"
+"path": "res://Creature.gd"
 }, {
 "base": "Resource",
 "class": "CreatureAction",
 "language": "GDScript",
 "path": "res://CreatureAction.gd"
-}, {
-"base": "Spatial",
-"class": "CreatureNode",
-"language": "GDScript",
-"path": "res://CreatureNode.gd"
 }, {
 "base": "Resource",
 "class": "CreatureStats",
@@ -40,11 +55,14 @@ _global_script_classes=[ {
 "path": "res://CreatureStats.gd"
 } ]
 _global_script_class_icons={
-"BattleEvent": "",
-"BattleParty": "",
-"BattlePartyAI": "",
+"ActionTimer": "",
+"Actions": "",
+"BQ_Action": "",
+"BQ_Animation": "",
+"BattleQueueItem": "",
+"BattleQueueReference": "",
+"Creature": "",
 "CreatureAction": "",
-"CreatureNode": "",
 "CreatureStats": ""
 }
 
@@ -57,3 +75,4 @@ config/description="Building a RPG battle system for One Game A Month"
 
 BattleManager="*res://BattleManager.gd"
 Logger="*res://Logger.gd"
+CreatureActionProcessor="*res://CreatureActionProcessor.gd"

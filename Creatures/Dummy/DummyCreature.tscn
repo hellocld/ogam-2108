@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Creatures/Dummy/DummyStats.tres" type="Resource" id=1]
+[ext_resource path="res://Creature.gd" type="Script" id=2]
+[ext_resource path="res://CreatureActions/Attack.tres" type="Resource" id=3]
+
+[node name="BattleCreature" type="Node"]
+script = ExtResource( 2 )
+Stats = ExtResource( 1 )
+Actions = [ ExtResource( 3 ) ]

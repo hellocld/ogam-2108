@@ -2,6 +2,11 @@ extends Node
 
 signal BattleEventDone
 
+enum QueueTypes {
+	ACTION,
+	ANIMATION
+}
+
 export(Resource) var CreatureA 
 export(Resource) var CreatureB
 
@@ -9,57 +14,57 @@ export(Resource) var CreatureB
 var event_queue = []
 var battle_parties = []
 
-var creature_a : CreatureNode
-var creature_b : CreatureNode
-var rng
+#var creature_a : CreatureNode
+#var creature_b : CreatureNode
 
 
 func _ready():
 	randomize()
-	rng = RandomNumberGenerator.new()
 	connect("BattleEventDone", self, "cleanup_event")
-	
-
-func register_party(party:BattleParty):
-	if !battle_parties.has(party):
-		battle_parties.append(party)
-	else:
-		Logger.log_warning(self, "Warning: BattleManager alread has reference to party %s" % party)
 
 
-func get_opposing_parties(party:BattleParty) -> Array:
-	var op = battle_parties.duplicate()
-	op.erase(party)
-	return op
-
-
-func queue_event(instigator:Node, event_signal:String):
-	Logger.log_info(self, "Queueing event %s for creature %s" % [event_signal, instigator.name])
-	var e = BattleEvent.new()
-	e.instigator = instigator
-	e.event_signal = event_signal
-	event_queue.append(e)
+func queue_item(ref:BattleQueueReference):
+	event_queue.push_back(ref)
 	if event_queue.size() == 1:
 		execute_next_event()
 
 
 func execute_next_event():
-	Logger.log_info(self, "Attemping to pop event...")
+	Logger.log_info(self, "Attemping to execute next queued event...")
 	if event_queue.size() <= 0:
 		Logger.log_info(self, "Queue empty.")
 		return
-	var e = event_queue.front() as BattleEvent
-	Logger.log_info(self, "Executing event %s on %s" % [e.event_signal, e.instigator.name])
-	e.instigator.emit_signal(e.event_signal)
+	Logger.log_info(self, "Executing event.")
+	var e = event_queue.front() as BattleQueueReference
+	_handle_event(e)
 
 
-func cleanup_event():
+func _handle_event(e:BattleQueueReference) -> void:
+	match(e.type):
+		QueueTypes.ANIMATION:
+			play_creature_animation(e.source, e.animation)
+		QueueTypes.ACTION:
+			apply_creature_effect(e.source, e.targets)
+		_:
+			Logger.log_warning(self, "Unable to process BattleQueueReference of type %s" % e.type)
+
+
+func _cleanup_event():
 	event_queue.pop_front()
 	if event_queue.size() > 0:
 		execute_next_event()
 
-func remove_events_for_instigator(instigator:Node):
+
+func remove_events_for_source(source:Creature):
 	for event in event_queue:
-		if event.instigator == instigator:
+		if event.source == source:
 			event_queue.erase(event)
-		
+
+
+func play_creature_animation(creature:Creature, animation:String):
+	creature.play_animation(animation)
+
+
+func apply_creature_effect(source, targets):
+	pass
+
